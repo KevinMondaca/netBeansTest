@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-//test
 public class Ejecutable {
     static ArrayList<Cliente> listClien = new ArrayList();
     static ArrayList<Auto> listAuto = new ArrayList();
@@ -11,7 +10,7 @@ public class Ejecutable {
     static Scanner tec = new Scanner(System.in);
     static Registro reg = new Registro();
     public static void main(String[] args) {
-        objetos();
+        cargaObjetos();
         menu();
     }
     
@@ -92,7 +91,7 @@ public class Ejecutable {
         }
     }
     
-    public static void objetos() {
+    public static void cargaObjetos() {
         Direccion d1 = new Direccion("Bolivar", 751, "San Francisco", "");
         Cliente c1 = new Cliente("Rodrigo Ramirez", 41851756, d1, 1145839157L);
         Direccion d2 = new Direccion("Mitre", 1395, "California", "3P");
