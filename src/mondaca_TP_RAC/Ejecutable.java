@@ -9,6 +9,7 @@ public class Ejecutable {
     static ArrayList<Auto> listAuto = new ArrayList();
     static ArrayList<Reserva> listReser = new ArrayList();
     static Scanner tec = new Scanner(System.in);
+    static Registro reg = new Registro();
     public static void main(String[] args) {
         objetos();
         menu();
@@ -52,11 +53,11 @@ public class Ejecutable {
             switch (x) {
                 case 0: a = false;
                 break;
-                case 1: reservas();
+                case 1: reg.mostrarReservas();
                 break;
-                case 2: clientes();
+                case 2: reg.mostrarClientes();
                 break;
-                case 3: autos();
+                case 3: reg.mostrarAutos();
                 break;
                 default: System.out.println("Seleccione una opcion.");
                 break;
@@ -79,246 +80,16 @@ public class Ejecutable {
             switch (x) {
                 case 0: a = false;
                 break;
-                case 1: nuevoReserva();
+                case 1: reg.crearReserva();
                 break;
-                case 2: nuevoCliente();
+                case 2: reg.crearCliente();
                 break;
-                case 3: nuevoAuto();
+                case 3: reg.crearAuto();
                 break;
                 default: System.out.println("Seleccione una opcion.");
                 break;
             }
         }
-    }
-    
-    public static void reservas() {
-        boolean a = true;
-        while(a) {
-            int r;
-            System.out.println("----------RESERVAS----------");
-            for (Reserva x: listReser) {
-                System.out.println((listReser.indexOf(x)+1) + " | " + x.getCliente().getNombre() + ":");
-                for (Auto y: x.getAutos()) {
-                    System.out.println("        " + y.getMarca() + " " + y.getModelo());
-                }
-            }
-            System.out.println("0 - SALIR");
-            System.out.println("----------------------------");
-            r = tec.nextInt();
-            tec.nextLine();
-            if (r == 0) {
-                a = false;
-            } else if (r > 0 && r <= listReser.size()) {
-                listReser.get(r-1).mostrarReserva();
-            } else {
-                System.out.println("----------------------------");
-                System.out.println("Seleccione una opcion.");
-            }
-        }
-    }
-    public static void clientes() {
-        boolean a = true;
-        while(a) {
-            int c;
-            System.out.println("-------CLIENTES-------");
-            for (Cliente x: listClien) {
-                System.out.println((listClien.indexOf(x)+1) + " | " + x.getNombre() + " - " + x.getDni());
-            }
-            System.out.println("0 - SALIR");
-            System.out.println("----------------------");
-            c = tec.nextInt();
-            tec.nextLine();
-            if (c == 0) {
-                a = false;
-            } else if (c > 0 && c <= listClien.size()) {
-                System.out.println("----------------------");
-                listClien.get(c-1).mostrarCliente();
-            } else {
-                System.out.println("----------------------");
-                System.out.println("Seleccione una opcion.");
-            }
-        }
-    }
-    public static void autos() {
-        boolean b = true;
-        while(b) {
-            int a;
-            System.out.println("-------------Autos-------------");
-            for (Auto x: listAuto) {
-                if (x.isReservado()) {
-                    System.out.println((listAuto.indexOf(x)+1) + " | " + x.getMarca() + " " + x.getModelo() + " - " + x.getMatricula() + " (RESERVADO)");
-                } else {
-                    System.out.println((listAuto.indexOf(x)+1) + " | " + x.getMarca() + " " + x.getModelo() + " - " + x.getMatricula());
-                }
-            }
-            System.out.println("0 - SALIR");
-            System.out.println("-------------------------------");
-            a = tec.nextInt();
-            tec.nextLine();
-            if (a == 0) {
-                b = false;
-            } else if (a > 0 && a <= listAuto.size()) {
-                System.out.println("-------------------------------");
-                listAuto.get(a-1).mostrarAuto();
-            } else {
-                System.out.println("-------------------------------");
-                System.out.println("Seleccione una opcion.");
-            }
-        }
-    }
-    
-    public static Reserva nuevoReserva() {
-        Reserva r1 = new Reserva();
-        boolean b1 = true;
-        while (b1) {
-            int x;
-            System.out.println("1 - Seleccionar cliente");
-            System.out.println("2 - Ingresar nuevo cliente");
-            x = tec.nextInt();
-            tec.nextLine();
-            if (x == 1) {
-                boolean bc = true;
-                while(bc) {
-                    int c;
-                    System.out.println("-------CLIENTES-------");
-                    for (Cliente y: listClien) {
-                        System.out.println((listClien.indexOf(y)+1) + " | " + y.getNombre() + " - " + y.getDni());
-                    }
-                    System.out.println("0 - CANCELAR");
-                    System.out.println("----------------------");
-                    c = tec.nextInt();
-                    tec.nextLine();
-                    if (c == 0) {
-                        bc = false;
-                    } else if (c > 0 && c <= listClien.size()) {
-                        System.out.println("----------------------");
-                        r1.setCliente(listClien.get(c-1));
-                        bc = false;
-                        b1 = false;
-                    } else {
-                        System.out.println("----------------------");
-                        System.out.println("Seleccione una opcion.");
-                    }
-                }
-            } else if (x == 2) {
-                r1.setCliente(nuevoCliente());
-                b1 = false;
-            } else {
-                System.out.println("----------------------");
-                System.out.println("Seleccione una opcion.");
-            }
-        }
-        boolean b2 = true;
-        while (b2) {
-            int x;
-            System.out.println("1 - Seleccionar auto");
-            System.out.println("2 - Ingresar nuevo auto");
-            x = tec.nextInt();
-            tec.nextLine();
-            if (x == 1) {
-                boolean ba = true;
-                while(ba) {
-                    int y;
-                    System.out.println("-------------Autos-------------");
-                    for (Auto a: listAuto) {
-                        if (!a.isReservado()) {
-                            System.out.println((listAuto.indexOf(a)+1) + " | " + a.getMarca() + " " + a.getModelo() + " - " + a.getMatricula());
-                        }
-                    }
-                    System.out.println("0 - CANCELAR");
-                    System.out.println("-------------------------------");
-                    y = tec.nextInt();
-                    tec.nextLine();
-                    if (y == 0) {
-                        ba = false;
-                    } else if (y > 0 && y <= listAuto.size()) {
-                        System.out.println("-------------------------------");
-                        listAuto.get(y-1).setReservado(true);
-                        r1.agregarAuto(listAuto.get(y-1));
-                        ba = false;
-                    } else {
-                        System.out.println("-------------------------------");
-                        System.out.println("Seleccione una opcion.");
-                    }
-                }
-            } else if (x == 2) {
-                r1.agregarAuto(nuevoAuto());
-            } else {
-                System.out.println("-------------------------------");
-                System.out.println("Seleccione una opcion.");
-            }
-            int z;
-            System.out.println("¿Agregar otro Auto?");
-            System.out.println("1 - SI");
-            System.out.println("2 - NO");
-            System.out.println("-------------------------------");
-            z = tec.nextInt();
-            tec.nextLine();
-            if (z == 1) {
-                b2 = true;
-            } else if (z == 2) {
-                b2 = false;
-            } else {
-                System.out.println("-------------------------------");
-                System.out.println("Seleccione una opcion.");
-            }
-        }
-        for (Auto a: r1.getAutos()) {
-            for (Auto v: listAuto) {
-                if (a.getMatricula().equals(v.getMatricula())){
-                    listAuto.get(listAuto.indexOf(v)).setReservado(true);
-                }
-            }
-        }
-        r1.setFechaInicio(LocalDate.now());
-        System.out.println("-------------------------------");
-        System.out.println("Ingrese los dias de la reserva:");
-        r1.setTiempoAlquiler(tec.nextInt());
-        tec.nextLine();
-        listReser.add(r1);
-        return r1;
-    }
-    public static Cliente nuevoCliente() {
-        Cliente c1 = new Cliente();
-        System.out.println("Ingrese los datos del cliente");
-        System.out.println("Nombre:");
-        c1.setNombre(tec.nextLine());
-        System.out.println("DNI:");
-        c1.setDni(tec.nextInt());
-        tec.nextLine();
-        System.out.println("Telefono:");
-        c1.setTelefono(tec.nextLong());
-        tec.nextLine();
-        System.out.println("-Direccion-");
-        System.out.println("Calle:");
-        c1.getDireccion().setCalle(tec.nextLine());
-        System.out.println("Altura:");
-        c1.getDireccion().setAltura(tec.nextInt());
-        tec.nextLine();
-        System.out.println("Barrio:");
-        c1.getDireccion().setBarrio(tec.nextLine());
-        System.out.println("Piso del departamento:");
-        c1.getDireccion().setPisoDto(tec.nextLine());
-        listClien.add(c1);
-        return c1;
-    }
-    public static Auto nuevoAuto() {
-        Auto a1 = new Auto();
-        System.out.println("Ingrese los datos del auto");
-        System.out.println("Matrucula:");
-        a1.setMatricula(tec.nextLine());
-        System.out.println("Marca:");
-        a1.setMarca(tec.nextLine());
-        System.out.println("Modelo:");
-        a1.setModelo(tec.nextLine());
-        System.out.println("Color:");
-        a1.setColor(tec.nextLine());
-        System.out.println("Precio/dia:");
-        a1.setPrecio(tec.nextDouble());
-        tec.nextLine();
-        a1.setReservado(false);
-        listAuto.add(a1);
-        return a1;
     }
     
     public static void objetos() {
@@ -343,19 +114,19 @@ public class Ejecutable {
         Reserva r2 = new Reserva(c2, LocalDate.of(2022, 11, 1), 14);
         r2.agregarAuto(a4);
         r2.agregarAuto(a3);
-        listClien.add(c1);
-        listClien.add(c2);
-        listClien.add(c3);
-        listClien.add(c4);
-        listAuto.add(a1);
-        listAuto.add(a2);
-        listAuto.add(a3);
-        listAuto.add(a4);
-        listAuto.add(a5);
-        listAuto.add(a6);
-        listAuto.add(a7);
-        listAuto.add(a8);
-        listReser.add(r1);
-        listReser.add(r2);
+        reg.agregarCliente(c1);
+        reg.agregarCliente(c2);
+        reg.agregarCliente(c3);
+        reg.agregarCliente(c4);
+        reg.agregarAuto(a1);
+        reg.agregarAuto(a2);
+        reg.agregarAuto(a3);
+        reg.agregarAuto(a4);
+        reg.agregarAuto(a5);
+        reg.agregarAuto(a6);
+        reg.agregarAuto(a7);
+        reg.agregarAuto(a8);
+        reg.agregarReserva(r1);
+        reg.agregarReserva(r2);
     }
 }
