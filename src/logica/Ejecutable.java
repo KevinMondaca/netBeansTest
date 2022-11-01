@@ -1,4 +1,9 @@
-package mondaca_TP_RAC;
+package logica;
+import modelo.Registro;
+import modelo.Direccion;
+import modelo.Cliente;
+import modelo.Auto;
+import modelo.Reserva;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;

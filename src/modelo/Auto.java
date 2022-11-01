@@ -1,4 +1,4 @@
-package mondaca_TP_RAC;
+package modelo;
 
 import java.util.Random;
 

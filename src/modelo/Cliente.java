@@ -1,4 +1,4 @@
-package mondaca_TP_RAC;
+package modelo;
 import java.util.ArrayList;
 public class Cliente {
     private static int nroCliente = 0;
@@ -32,49 +32,42 @@ public class Cliente {
     public static int getNroCliente() {
         return nroCliente;
     }
-
     public static void setNroCliente(int nroCliente) {
         Cliente.nroCliente = nroCliente;
     }
-
+    
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     public int getDni() {
         return dni;
     }
-
     public void setDni(int dni) {
         this.dni = dni;
     }
-
+    
     public Direccion getDireccion() {
         return direccion;
     }
-
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
-
+    
     public long getTelefono() {
         return telefono;
     }
-
     public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
-    
 }

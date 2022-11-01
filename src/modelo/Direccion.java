@@ -1,4 +1,4 @@
-package mondaca_TP_RAC;
+package modelo;
 
 public class Direccion {
     private String calle;
@@ -14,6 +14,17 @@ public class Direccion {
         this.barrio = b;
         this.pisoDto = p;
     }
+
+    @Override
+    public String toString() {
+        String s;
+        if (this.pisoDto.isEmpty()) {
+            s = this.calle + " " + this.altura + ", barrio " + this.barrio; 
+        } else {
+            s = this.calle + " " + this.altura + " piso " + this.pisoDto + ", barrio " + this.barrio;
+        }
+        return s;
+    }
     
     public void mostrarDireccion() {
         System.out.println("Dirección:");
@@ -27,7 +38,6 @@ public class Direccion {
     public String getCalle() {
         return calle;
     }
-
     public void setCalle(String calle) {
         this.calle = calle;
     }
@@ -35,7 +45,6 @@ public class Direccion {
     public int getAltura() {
         return altura;
     }
-
     public void setAltura(int altura) {
         this.altura = altura;
     }
@@ -43,7 +52,6 @@ public class Direccion {
     public String getBarrio() {
         return barrio;
     }
-
     public void setBarrio(String barrio) {
         this.barrio = barrio;
     }
@@ -51,7 +59,6 @@ public class Direccion {
     public String getPisoDto() {
         return pisoDto;
     }
-
     public void setPisoDto(String pisoDto) {
         this.pisoDto = pisoDto;
     }
