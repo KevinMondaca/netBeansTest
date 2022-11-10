@@ -20,8 +20,9 @@ public class AccesoDatos {
     
     public AccesoDatos(){
         try {
-            Class.forName("com.mysql.cj.jbdc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/rent_a_car", "root", "");
+            comandos = conn.createStatement();
         } catch (ClassNotFoundException ex) {
             System.out.println("Error: No se encontro la BD");
         } catch (SQLException ex) {
@@ -38,5 +39,25 @@ public class AccesoDatos {
             System.out.println("Error en la sintaxis SQL");
         }
     }
-    
+    public void insertarAuto(Auto a){
+        String sql = "insert into auto values('" + a.getMatricula() + "', '" + a.getModelo() + "', '" + a.getMarca() + "', '" + a.getColor() + "', " + a.getPrecio() + ", NULL)";
+        System.out.println(sql);
+        try {
+            comandos.executeUpdate(sql);
+        } catch (SQLException ex) {
+            System.out.println("Error en la sintaxis SQL");
+        }
+    }
+    public void insertarReserva(Reserva r){
+        String sql = "insert into reserva values(" + r.getIdReserva() + ", " + r.getCliente().getDni() + ", '" + r.getFechaInicio() + "', " + r.getTiempoAlquiler() + ")";
+        System.out.println(sql);
+        try {
+            comandos.executeUpdate(sql);
+            for (Auto x: r.getAutos()) {
+                comandos.executeUpdate("update auto set reserva = " + r.getIdReserva() + " where matricula = '" + x.getMatricula() + "'");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en la sintaxis SQL");
+        }
+    }
 }

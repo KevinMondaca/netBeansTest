@@ -21,7 +21,7 @@ public class Auto {
         this.reservado = r;
     }
     
-    public String generarMatricula(){
+    public static String generarMatricula(){
         Random random = new Random();
         char c1 = (char)(random.nextInt(26)+ 'A');
         char c2 = (char)(random.nextInt(26)+ 'A');

@@ -2,14 +2,20 @@ package modelo;
 import java.util.ArrayList;
 import java.time.LocalDate;
 public class Reserva {
+    private static int nroReserva = 1;
+    private int idReserva;
     private Cliente cliente;
     private ArrayList<Auto> autos = new ArrayList();
     private LocalDate fechaInicio;
     private int tiempoAlquiler;
     
     public Reserva(){
+        this.idReserva = nroReserva;
+        nroReserva++;
     }
     public Reserva(Cliente c, LocalDate fi, int ta) {
+        this.idReserva = nroReserva;
+        nroReserva++;
         this.cliente = c;
         this.fechaInicio = fi;
         this.tiempoAlquiler = ta;
@@ -43,6 +49,22 @@ public class Reserva {
     
     public void agregarAuto(Auto a) {
         this.autos.add(a);
+    }
+
+    public static int getNroReserva() {
+        return nroReserva;
+    }
+
+    public static void setNroReserva(int nroReserva) {
+        Reserva.nroReserva = nroReserva;
+    }
+
+    public int getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
     }
 
     public Cliente getCliente() {

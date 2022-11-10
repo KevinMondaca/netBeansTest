@@ -15,7 +15,7 @@ public class Ejecutable {
     static ArrayList<Reserva> listReser = new ArrayList();
     static Scanner tec = new Scanner(System.in);
     static Registro reg = new Registro();
-    static AccesoDatos AD = new AccesoDatos();
+    static AccesoDatos BD = new AccesoDatos();
     public static void main(String[] args) {
         cargaObjetos();
         menu();
@@ -86,11 +86,11 @@ public class Ejecutable {
             switch (x) {
                 case 0: a = false;
                 break;
-                case 1: reg.crearReserva();
+                case 1: BD.insertarReserva(reg.crearReserva());
                 break;
-                case 2: reg.crearCliente();
+                case 2: BD.insertarCliente(reg.crearCliente());
                 break;
-                case 3: reg.crearAuto();
+                case 3: BD.insertarAuto(reg.crearAuto());
                 break;
                 default: System.out.println("Seleccione una opcion.");
                 break;
@@ -134,6 +134,19 @@ public class Ejecutable {
         reg.agregarAuto(a8);
         reg.agregarReserva(r1);
         reg.agregarReserva(r2);
-        AD.insertarCliente(c1);
+        BD.insertarCliente(c1);
+        BD.insertarCliente(c2);
+        BD.insertarCliente(c3);
+        BD.insertarCliente(c4);
+        BD.insertarAuto(a1);
+        BD.insertarAuto(a2);
+        BD.insertarAuto(a3);
+        BD.insertarAuto(a4);
+        BD.insertarAuto(a5);
+        BD.insertarAuto(a6);
+        BD.insertarAuto(a7);
+        BD.insertarAuto(a8);
+        BD.insertarReserva(r1);
+        BD.insertarReserva(r2);
     }
 }
