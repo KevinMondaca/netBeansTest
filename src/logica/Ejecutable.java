@@ -4,6 +4,7 @@ import modelo.Direccion;
 import modelo.Cliente;
 import modelo.Auto;
 import modelo.Reserva;
+import accesoDatos.AccesoDatos;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Ejecutable {
     static ArrayList<Reserva> listReser = new ArrayList();
     static Scanner tec = new Scanner(System.in);
     static Registro reg = new Registro();
+    static AccesoDatos AD = new AccesoDatos();
     public static void main(String[] args) {
         cargaObjetos();
         menu();
@@ -132,5 +134,6 @@ public class Ejecutable {
         reg.agregarAuto(a8);
         reg.agregarReserva(r1);
         reg.agregarReserva(r2);
+        AD.insertarCliente(c1);
     }
 }

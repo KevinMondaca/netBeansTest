@@ -1,10 +1,9 @@
 package modelo;
-import modelo.Reserva;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
-import modelo.Auto;
-import modelo.Cliente;
+
 public class Registro {
     private ArrayList<Cliente> listCliente = new ArrayList();
     private ArrayList<Auto> listAuto = new ArrayList();
